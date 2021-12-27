@@ -4,7 +4,10 @@ def caesar_cipher(str, num, direction="right")
     word = []
     new_arr = []
     ("a".."z").each {|letter| new_arr << letter}
-    str.split("").each do |letter|
+    str.chars.each_with_index do |letter, index|
+        if letter==" "
+            word[index] = letter
+        else
         idx = new_arr.index(letter.downcase)
         case direction
         when "right"
@@ -24,12 +27,15 @@ def caesar_cipher(str, num, direction="right")
                 word << new_arr[new_idx]
             end
         else
-            return "Wrong direction. Kindly enter the right direction"
+            return "Wrong direction. Kindly enter the correct direction"
         end
     end
+    end
 
-    word.join().capitalize
+    word.join("")
 end
-
-word = caesar_cipher("what", 5)
+word = caesar_cipher("what a string", 5, direction="left")
 p word
+
+
+# "asdf jkl".chars.each_with_index {|l, i|
